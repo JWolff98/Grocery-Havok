@@ -8,6 +8,7 @@ extends KinematicBody2D
 export var speed = 200
 var screen_size
 # Called when the node enters the scene tree for the first time.
+export var Bullet = preload("res://Bullet.tscn")
 func _ready():
 	screen_size = get_viewport_rect().size
 	# Replace with function body.
@@ -18,6 +19,7 @@ func _ready():
 #	pass
 func _physics_process(delta):
 	var velocity = Vector2.ZERO
+	$gun_center.look_at(get_global_mouse_position())
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -47,3 +49,11 @@ func _physics_process(delta):
 			$AnimatedSprite.animation = "walk_left"
 		else:
 			$AnimatedSprite.animation = "walk_right"
+func _unhandled_input(event):
+	if event.is_action_released("attack"):
+		var bullet = Bullet.instance()
+		owner.add_child(bullet)
+		bullet.set_ang($gun_center.rotation)
+		bullet.global_position = $gun_center/gun/Muzzle.global_position
+		$gun_shot.play()
+		$gun_shot.stop()
