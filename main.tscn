@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/backgrounds/produce_aisle/music/produce_aisle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
@@ -8,18 +8,33 @@
 [ext_resource path="res://main.gd" type="Script" id=6]
 [ext_resource path="res://assets/GameOver.wav" type="AudioStream" id=7]
 [ext_resource path="res://mushroom.tscn" type="PackedScene" id=8]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=9]
+[ext_resource path="res://tutorial.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/menu.png" type="Texture" id=11]
+[ext_resource path="res://assets/Victory.wav" type="AudioStream" id=12]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 17, 185, 0, 0, 0, 0, 173, 84, 0, 0, 0, 0, 572, 327, 0, 0, 0, 0, 399, 461, 0, 0, 0, 0, 570, 570, 0, 0, 0, 0, 86, 300, 0, 0, 0, 0, 27, 200 )
 }
 
+[sub_resource type="RectangleShape2D" id=2]
+
 [node name="main" type="Node"]
 script = ExtResource( 6 )
 grape = ExtResource( 4 )
 mushroom = ExtResource( 8 )
 
+[node name="grey" type="ColorRect" parent="."]
+margin_right = 600.0
+margin_bottom = 600.0
+color = Color( 0.313726, 0.270588, 0.270588, 1 )
+
+[node name="tutorial" parent="." instance=ExtResource( 10 )]
+visible = false
+
 [node name="background_1" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 64, 275 )
@@ -45,6 +60,32 @@ rotation = -0.57457
 [node name="gameover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
+[node name="HUD" parent="." instance=ExtResource( 9 )]
+
+[node name="start_menu" type="Area2D" parent="."]
+z_index = 3
+
+[node name="menu" type="TextureRect" parent="start_menu"]
+margin_right = 600.0
+margin_bottom = 600.0
+texture = ExtResource( 11 )
+expand = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="start_menu"]
+shape = SubResource( 2 )
+
+[node name="start_position" type="Position2D" parent="."]
+position = Vector2( 63, 275 )
+
+[node name="victory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[connection signal="done" from="tutorial" to="." method="_on_tutorial_done"]
 [connection signal="hit" from="player" to="." method="_on_player_hit"]
+[connection signal="victory" from="player" to="." method="_on_player_victory"]
 [connection signal="timeout" from="mushroomTimer" to="." method="_on_mushroomTimer_timeout"]
 [connection signal="timeout" from="grapeTimer" to="." method="_on_grapeTimer_timeout"]
+[connection signal="game_over" from="HUD" to="." method="_on_HUD_game_over"]
+[connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
+[connection signal="tutorial" from="HUD" to="." method="_on_HUD_tutorial"]
+[connection signal="win" from="HUD" to="." method="_on_HUD_win"]

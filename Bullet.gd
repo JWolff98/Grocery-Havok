@@ -1,6 +1,5 @@
 extends Area2D
 var speed = 15
-var num_enemies_hit = 0
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -25,12 +24,12 @@ func set_ang(an):
 
 func _on_Bullet_body_entered(body):
 	if body.is_in_group("mobs"):	
-		num_enemies_hit += 1
+		get_parent().get_node("player").num_enemies_hit += 1
 		body.queue_free() # Replace with function body
 	queue_free()
 	
 	#22 enemies in the first wave
-	if num_enemies_hit == 22:
+	if get_parent().get_node("player").num_enemies_hit == 22:
 		$success.play()
 	
 	

@@ -12,9 +12,7 @@ func _physics_process(delta):
 	var space_state = get_world_2d().direct_space_state
 	var result = space_state.intersect_ray(position, get_parent().get_node("player").position, [self])
 	
-	if position.distance_to(get_parent().get_node("player").position) <= 40:
-		$AnimatedSprite.animation = "attack"
-	elif (result.collider.name.begins_with("player")):
+	if (result.collider.name.begins_with("player")):
 	
 		#check if mushroom can see the player
 			
@@ -22,7 +20,10 @@ func _physics_process(delta):
 		velocity = (move_towards - position).normalized() * speed
 		
 		$AnimatedSprite.flip_h = velocity.x < 0
-		$AnimatedSprite.animation = "running"
+		if position.distance_to(get_parent().get_node("player").position) <= 40:
+			$AnimatedSprite.animation = "attack"
+		else:
+			$AnimatedSprite.animation = "running"
 	else:
 		$AnimatedSprite.animation = "idle"
 	
@@ -31,7 +32,7 @@ func _physics_process(delta):
 		if collision:
 			if(collision.collider.name.begins_with("aisle")):
 				framedVelocity = velocity.bounce(collision.normal)
-				frameTimer = -150
+				frameTimer = -100
 	
 	if frameTimer < 0:
 		move_and_collide(framedVelocity * delta)
@@ -44,7 +45,6 @@ func _physics_process(delta):
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

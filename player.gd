@@ -4,12 +4,14 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
+
 export var speed = 200
+export var num_enemies_hit = 0
 var screen_size
 var frameTimer
 var framedVelocity
-var num_enemies_hit = 0
 
+signal victory
 signal hit
 # Called when the node enters the scene tree for the first time.
 export var Bullet = preload("res://Bullet.tscn")
@@ -67,6 +69,10 @@ func _physics_process(delta):
 			$AnimatedSprite.animation = "walk_left"
 		else:
 			$AnimatedSprite.animation = "walk_right"
+	
+	if num_enemies_hit == 22:
+		emit_signal("victory")
+			
 func _unhandled_input(event):
 	if event.is_action_released("attack"):
 		var bullet = Bullet.instance()
@@ -76,13 +82,15 @@ func _unhandled_input(event):
 		$gun_shot.play()
 		$gun_shot.stop()
 
-
 func _on_aoi_body_entered(body):
 	if body.is_in_group("mobs"):
-		num_enemies_hit += 1
 		emit_signal("hit")
 		body.queue_free()
 		hide()
-		
-		
-		
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
+
+

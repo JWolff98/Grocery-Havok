@@ -20,7 +20,7 @@ func _physics_process(delta):
 		if collision:
 			if(collision.collider.name.begins_with("aisle")):
 				framedVelocity = velocity.bounce(collision.normal)
-				frameTimer = -150
+				frameTimer = -100
 	
 	if frameTimer < 0:
 		move_and_collide(framedVelocity * delta)
@@ -34,7 +34,6 @@ func _physics_process(delta):
 func _ready():
 	screen_size = get_viewport_rect().size
 	frameTimer = 0
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
