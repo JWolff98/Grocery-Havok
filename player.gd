@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -9,6 +8,7 @@ export var speed = 200
 var screen_size
 var frameTimer
 var framedVelocity
+var num_enemies_hit = 0
 
 signal hit
 # Called when the node enters the scene tree for the first time.
@@ -79,7 +79,10 @@ func _unhandled_input(event):
 
 func _on_aoi_body_entered(body):
 	if body.is_in_group("mobs"):
+		num_enemies_hit += 1
 		emit_signal("hit")
 		body.queue_free()
 		hide()
+		
+		
 		
