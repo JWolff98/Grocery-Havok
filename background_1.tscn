@@ -75,7 +75,7 @@ polygon = PoolVector2Array( 0, 355, 15, 349, 0, 335 )
 polygon = PoolVector2Array( 184, 599, 238, 564, -3, 411, 2, 598 )
 
 [node name="Area2D" type="Area2D" parent="."]
-z_index = 1
+z_index = 3
 
 [node name="foreground" type="TextureRect" parent="Area2D"]
 margin_right = 600.0
