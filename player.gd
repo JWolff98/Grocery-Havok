@@ -4,7 +4,6 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
-
 export var speed = 200
 export var num_enemies_hit = 0
 var screen_size
@@ -70,7 +69,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.animation = "walk_right"
 	
-	if num_enemies_hit == 22:
+	if num_enemies_hit == 23:
 		emit_signal("victory")
 			
 func _unhandled_input(event):

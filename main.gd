@@ -1,6 +1,7 @@
 extends Node
 export (PackedScene) var grape
 export (PackedScene) var mushroom
+export (PackedScene) var pepper = preload("res://pepper.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -8,11 +9,14 @@ export (PackedScene) var mushroom
 var num_grapes = 0
 var num_mushroom = 0
 var game_start = false
+var p = pepper.instance()
+var start_hidden = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$player.hide()
 	$tutorial.hide()
+	$pepper.turn_off()
 	$background_1.hide()
 	$background_1/aisle_0/CollisionPolygon2D.disabled = true
 	$background_1/aisle_1/CollisionPolygon2D.disabled = true
@@ -26,8 +30,13 @@ func _ready():
 	randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if $player.is_visible():
+		if p.off:
+			$background_1.hide()
+			start_hidden = true
+		if not p.off and start_hidden:
+			$background_1.show()
 
 func _on_grapeTimer_timeout():
 	# Choose a random location on Path2D.
@@ -77,10 +86,16 @@ func _on_mushroomTimer_timeout():
 	num_mushroom += 1
 	if num_mushroom == 7:
 		$mushroomTimer.stop()
-
+		p = pepper.instance()
+		p.scale.x = 1
+		p.scale.y = 1
+		add_child(p)
+		p.position = Vector2(160,100)
+		p.start()
 
 func _on_HUD_start_game():
 	num_grapes = 0
+	p = pepper.instance()
 	$start_menu.hide()
 	$tutorial.hide()
 	$background_1.show()
@@ -95,8 +110,6 @@ func _on_HUD_start_game():
 	$background_1/aisle_8/CollisionPolygon2D.disabled = false
 	$player.start($start_position.position)
 	$grapeTimer.start() # Replace with function body.
-	game_start = true
-
 
 func _on_HUD_game_over():
 	num_grapes = 0
@@ -117,7 +130,6 @@ func _on_HUD_tutorial():
 func _on_tutorial_done():
 	$HUD/start_button.show()
 
-
 func _on_HUD_win():
 	pass # Replace with function body.
 
@@ -137,3 +149,7 @@ func _on_player_victory():
 	$victory.stop()
 	game_start = false
 	$HUD.show_congrats()
+
+
+func _on_pepper_off():
+	$background_1.hide()
