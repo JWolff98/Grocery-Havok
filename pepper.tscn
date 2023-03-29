@@ -1,8 +1,7 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/red_pepper_burn.png" type="Texture" id=1]
 [ext_resource path="res://assets/red_pepper_idle.png" type="Texture" id=2]
-[ext_resource path="res://assets/red_pepper_beast_transformation.png" type="Texture" id=3]
 [ext_resource path="res://pepper.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -68,21 +67,6 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 474, 65, 158 )
 
-[sub_resource type="AtlasTexture" id=42]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 65, 158 )
-
-[sub_resource type="AtlasTexture" id=43]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 65, 0, 65, 158 )
-
-[sub_resource type="AtlasTexture" id=44]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 130, 0, 65, 158 )
-
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
 atlas = ExtResource( 2 )
@@ -140,11 +124,6 @@ animations = [ {
 "name": "burn",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
-"loop": true,
-"name": "death",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
 "loop": true,
 "name": "idle",
@@ -166,7 +145,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -1, -46 )
 frames = SubResource( 32 )
-animation = "death"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

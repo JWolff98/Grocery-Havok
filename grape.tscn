@@ -95,6 +95,8 @@ animations = [ {
 } ]
 
 [node name="grape" type="KinematicBody2D" groups=["mobs"]]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["mobs"]]
@@ -106,3 +108,5 @@ position = Vector2( -4.76837e-07, 0 )
 scale = Vector2( 0.625, 0.88 )
 frames = SubResource( 2 )
 animation = "move"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

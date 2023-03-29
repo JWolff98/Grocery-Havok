@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/backgrounds/produce_aisle/music/produce_aisle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
@@ -21,6 +21,11 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id=2]
 
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 89, 20, 5, 64, 1, 2, 103, 21, 593, 298, 296, 156, 188, 89, 392, 433, 565, 336, 599, 323, 466, 419, 315, 496, 277, 522, 605, 510, 603, 601, 401, 605, 259, 593, 228, 566, 202, 599, 57, 35, 33, 177, 3, 160, 83, 350, 58, 372, 5, 389, 145, 255, 142, 278, 299, 375, 228, 537, 201, 511, 125, 464, 67, 416, 256, 200, 300, 175 )
+polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 3, 4, 5, 6 ), PoolIntArray( 7, 8, 9, 10, 11 ), PoolIntArray( 12, 11, 10, 13, 14, 15, 16, 17 ), PoolIntArray( 16, 18, 17 ), PoolIntArray( 19, 3, 6, 20, 21 ), PoolIntArray( 22, 23, 24, 21, 20, 25, 26 ), PoolIntArray( 27, 7, 11, 22, 26 ), PoolIntArray( 12, 17, 28 ), PoolIntArray( 23, 12, 28, 29 ), PoolIntArray( 23, 29, 30, 31 ), PoolIntArray( 23, 31, 24 ), PoolIntArray( 32, 26, 25, 5 ), PoolIntArray( 33, 32, 5 ), PoolIntArray( 8, 33, 5, 4, 9 ) ]
+outlines = [ PoolVector2Array( 3, 160, 5, 389, 67, 416, 125, 464, 201, 511, 228, 537, 228, 566, 202, 599, 259, 593, 401, 605, 603, 601, 605, 510, 466, 419, 599, 323, 593, 298, 103, 21, 57, 35 ), PoolVector2Array( 256, 200, 142, 278, 299, 375, 392, 433, 565, 336, 300, 175 ), PoolVector2Array( 33, 177, 188, 89, 296, 156, 145, 255 ), PoolVector2Array( 58, 372, 83, 350, 315, 496, 277, 522 ), PoolVector2Array( 1, 2, 5, 64, 89, 20 ) ]
+
 [node name="main" type="Node"]
 script = ExtResource( 6 )
 grape = ExtResource( 4 )
@@ -35,7 +40,6 @@ color = Color( 0.313726, 0.270588, 0.270588, 1 )
 visible = false
 
 [node name="background_1" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 64, 275 )
@@ -84,6 +88,10 @@ stream = ExtResource( 12 )
 [node name="pepper" parent="." instance=ExtResource( 13 )]
 visible = false
 
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+position = Vector2( -2, -2 )
+navpoly = SubResource( 3 )
+
 [connection signal="done" from="tutorial" to="." method="_on_tutorial_done"]
 [connection signal="hit" from="player" to="." method="_on_player_hit"]
 [connection signal="victory" from="player" to="." method="_on_player_victory"]
@@ -93,6 +101,3 @@ visible = false
 [connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
 [connection signal="tutorial" from="HUD" to="." method="_on_HUD_tutorial"]
 [connection signal="win" from="HUD" to="." method="_on_HUD_win"]
-[connection signal="pepper_death" from="pepper" to="player" method="_on_pepper_pepper_death"]
-[connection signal="smoke_screen" from="pepper" to="." method="_on_pepper_smoke_screen"]
-[connection signal="smoke_screen_stop" from="pepper" to="." method="_on_pepper_smoke_screen_stop"]

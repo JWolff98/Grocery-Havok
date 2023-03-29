@@ -61,7 +61,6 @@ func _on_grapeTimer_timeout():
 		$grapeTimer.stop()
 		$mushroomTimer.start()
 
-
 func _on_player_hit():
 	$produce_aisle.stop()
 	$grapeTimer.stop()

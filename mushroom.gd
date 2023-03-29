@@ -9,6 +9,7 @@ var current_hp
 var dead = false
 var hit = false
 var tutorial = false
+onready var navigation_agent = $NavigationAgent2D
 signal mushroom_death
 
 func _physics_process(delta):
@@ -24,7 +25,11 @@ func _physics_process(delta):
 			#check if mushroom can see the player
 				
 			var move_towards = get_parent().get_node("player").position
-			velocity = (move_towards - position).normalized() * speed
+		
+			navigation_agent.set_target_location(move_towards)
+			var move_direction = position.direction_to(navigation_agent.get_next_location())
+			velocity = move_direction * speed
+			navigation_agent.set_velocity(velocity)
 			
 			$AnimatedSprite.flip_h = velocity.x < 0
 			if position.distance_to(get_parent().get_node("player").position) <= 40:
@@ -34,18 +39,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.animation = "idle"
 		
-		var collision = move_and_collide(velocity*delta)
-		if frameTimer == 0:
-			if collision:
-				if(collision.collider.name.begins_with("aisle")):
-					framedVelocity = velocity.bounce(collision.normal)
-					frameTimer = -400
-		
-		if frameTimer < 0:
-			move_and_collide(framedVelocity * delta)
-			frameTimer += 1
-		else:
-			move_and_collide(velocity*delta)
+		velocity = move_and_slide(velocity)
 		position.x = clamp(position.x, 0, screen_size.x)
 		position.y = clamp(position.y, 0, screen_size.y)
 # Called when the node enters the scene tree for the first time.

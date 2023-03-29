@@ -174,3 +174,5 @@ shape = SubResource( 27 )
 position = Vector2( 2, -29 )
 frames = SubResource( 11 )
 animation = "hit"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
