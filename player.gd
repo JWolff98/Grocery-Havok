@@ -10,6 +10,7 @@ var screen_size
 var frameTimer
 var framedVelocity
 var tutorial = false
+var can_shoot = true
 signal victory
 signal hit
 signal enemy_defeated
@@ -74,12 +75,16 @@ func _physics_process(delta):
 			
 func _unhandled_input(event):
 	if event.is_action_released("attack"):
-		var bullet = Bullet.instance()
-		owner.add_child(bullet)
-		bullet.set_ang($gun_center.rotation)
-		bullet.global_position = $gun_center/gun/Muzzle.global_position
-		$gun_shot.play()
-		$gun_shot.stop()
+		if can_shoot:
+			var bullet = Bullet.instance()
+			owner.add_child(bullet)
+			bullet.set_ang($gun_center.rotation)
+			bullet.global_position = $gun_center/gun/Muzzle.global_position
+			$gun_shot.play()
+			$gun_shot.stop()
+			
+			can_shoot = false
+			$bulletCooldown.start()
 
 func _on_aoi_body_entered(body):
 	if body.is_in_group("mobs") and not tutorial:
@@ -99,8 +104,10 @@ func _on_mushroom_death():
 	num_enemies_hit += 1
 	emit_signal("enemy_defeated")
 
-
 func _on_pepper_death():
 	num_enemies_hit += 1
 	emit_signal("enemy_defeated")
 	# Replace with function body.
+
+func _on_bulletCooldown_timeout():
+	can_shoot = true

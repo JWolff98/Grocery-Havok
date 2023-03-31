@@ -42,8 +42,6 @@ func _on_AnimatedSprite_animation_finished():
 		off = true
 		$AnimatedSprite.animation = "burn"
 		emit_signal("smoke_screen")
-		
-
 
 func turn_off():
 	$AnimatedSprite.playing = false
@@ -56,7 +54,8 @@ func on_hit(dmg):
 		$AnimatedSprite.play()
 		yield($AnimatedSprite, "animation_finished")
 		$AnimatedSprite.animation = "idle"
-		$AnimatedSprite.playing = true     
+		$AnimatedSprite.playing = true    
+		 
 func on_death():
 	dead = true
 	get_node("CollisionShape2D").set_deferred("disabled", true)

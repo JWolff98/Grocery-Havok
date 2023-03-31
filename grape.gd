@@ -8,7 +8,7 @@ var current_hp
 
 onready var navigation_agent = $NavigationAgent2D
 var screen_size
-var speed = 50
+var speed = 100
 var frameTimer
 var framedVelocity
 var dead = false
@@ -25,7 +25,7 @@ func _physics_process(delta):
 		var move_direction = position.direction_to(navigation_agent.get_next_location())
 		var velocity = move_direction * speed
 		navigation_agent.set_velocity(velocity)
-		velocity = move_and_slide(velocity)
+		velocity = move_and_collide(velocity*delta)
 
 		#var collision = move_and_collide(velocity*delta)
 		#if frameTimer == 0:

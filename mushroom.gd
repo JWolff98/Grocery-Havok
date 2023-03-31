@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var screen_size
-var speed = 100
+var speed = 200
 var frameTimer
 var framedVelocity
 var max_hp = 300
@@ -39,7 +39,7 @@ func _physics_process(delta):
 		else:
 			$AnimatedSprite.animation = "idle"
 		
-		velocity = move_and_slide(velocity)
+		velocity = move_and_collide(velocity * delta)
 		position.x = clamp(position.x, 0, screen_size.x)
 		position.y = clamp(position.y, 0, screen_size.y)
 # Called when the node enters the scene tree for the first time.
