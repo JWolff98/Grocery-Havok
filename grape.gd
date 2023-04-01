@@ -13,10 +13,12 @@ var frameTimer
 var framedVelocity
 var dead = false
 var tutorial = false
+var is_freed = false
+var disabled = false
 signal grape_death
 
 func _physics_process(delta):
-	if not dead:
+	if not dead and not disabled:
 		$AnimatedSprite.playing = true
 		$AnimatedSprite.animation = "move"
 		var move_towards = get_parent().get_node("player").position
@@ -71,4 +73,14 @@ func on_death():
 	yield($AnimatedSprite, "animation_finished")
 	emit_signal("grape_death")
 	queue_free()
+	is_freed = true
 	
+func is_dead(): 
+	return is_freed
+
+func disable():
+	get_node("CollisionShape2D").set_deferred("disabled", true)
+	disabled = true
+func enable():
+	get_node("CollisionShape2D").set_deferred("disabled", false)
+	disabled = false
