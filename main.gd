@@ -50,8 +50,8 @@ func _on_grapeTimer_timeout():
 		$grapePath/grapeSpawnLocation.set_offset(randi())
 	# Create a Mob instance and add it to the scene.
 	var g = grape.instance()
-	g.scale.x = 3
-	g.scale.y = 3
+	g.scale.x = 1.7
+	g.scale.y = 1.7
 	add_child(g)
 	# Set the mob's position to a random location.
 	g.position = $grapePath/grapeSpawnLocation.position
