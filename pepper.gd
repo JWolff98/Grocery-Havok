@@ -8,6 +8,7 @@ var current_hp
 var dead = false
 var tutorial = false
 signal pepper_death
+
 func _physics_process(delta):
 	if not dead:
 		pass

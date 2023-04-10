@@ -1,35 +1,46 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/killer_grapes.png" type="Texture" id=1]
 [ext_resource path="res://grape.gd" type="Script" id=2]
+[ext_resource path="res://assets/killer_grapes (1).png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 7 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=18]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 50, 32, 25 )
+atlas = ExtResource( 3 )
+region = Rect2( 64, 100, 32, 25 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=19]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 32, 50, 32, 25 )
+atlas = ExtResource( 3 )
+region = Rect2( 96, 100, 32, 25 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=20]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 64, 50, 32, 25 )
+atlas = ExtResource( 3 )
+region = Rect2( 128, 100, 32, 25 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=21]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 96, 50, 32, 25 )
+atlas = ExtResource( 3 )
+region = Rect2( 0, 125, 32, 25 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=22]
 flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 128, 50, 32, 25 )
+atlas = ExtResource( 3 )
+region = Rect2( 32, 125, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 125, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 96, 125, 32, 25 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
@@ -81,9 +92,39 @@ flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 32, 25, 32, 25 )
 
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 32, 25 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 25, 32, 25 )
+
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": true,
 "name": "death",
 "speed": 5.0
@@ -91,6 +132,11 @@ animations = [ {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "move",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"loop": true,
+"name": "spawn",
 "speed": 5.0
 } ]
 
@@ -107,6 +153,6 @@ shape = SubResource( 1 )
 position = Vector2( -4.76837e-07, 0 )
 scale = Vector2( 0.625, 0.88 )
 frames = SubResource( 2 )
-animation = "move"
+animation = "spawn"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

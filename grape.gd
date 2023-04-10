@@ -12,11 +12,14 @@ var speed = 100
 var frameTimer
 var framedVelocity
 var dead = false
+var spawned = false
 var tutorial = false
+var is_freed = false
+var disabled = false
 signal grape_death
 
 func _physics_process(delta):
-	if not dead:
+	if not dead and spawned:
 		$AnimatedSprite.playing = true
 		$AnimatedSprite.animation = "move"
 		var move_towards = get_parent().get_node("player").position
@@ -47,11 +50,21 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	frameTimer = 0
 	current_hp = max_hp
+	on_spawn()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func on_spawn():
+	$AnimatedSprite.playing = true
+	$AnimatedSprite.animation = "spawn"
+	$AnimatedSprite.play()
+	yield($AnimatedSprite, "animation_finished")
+	spawned = true
+	$AnimatedSprite.animation = "move"
+	
 func on_hit(dmg):
 	current_hp -= dmg
 	if current_hp <= 0 and not tutorial:
@@ -71,4 +84,14 @@ func on_death():
 	yield($AnimatedSprite, "animation_finished")
 	emit_signal("grape_death")
 	queue_free()
+	is_freed = true
 	
+func is_dead(): 
+	return is_freed
+
+func disable():
+	get_node("CollisionShape2D").set_deferred("disabled", true)
+	disabled = true
+func enable():
+	get_node("CollisionShape2D").set_deferred("disabled", false)
+	disabled = false

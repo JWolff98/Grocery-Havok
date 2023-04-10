@@ -9,6 +9,8 @@ var current_hp
 var dead = false
 var hit = false
 var tutorial = false
+var is_freed = false
+var disabled = false
 onready var navigation_agent = $NavigationAgent2D
 signal mushroom_death
 
@@ -68,6 +70,7 @@ func on_hit(dmg):
 		yield($AnimatedSprite, "animation_finished")
 		$AnimatedSprite.animation = "running"
 		$AnimatedSprite.playing = true
+		
 func on_death():
 	dead = true
 	get_node("CollisionShape2D").set_deferred("disabled", true)
@@ -75,6 +78,17 @@ func on_death():
 	yield($AnimatedSprite, "animation_finished")
 	emit_signal("mushroom_death")
 	queue_free()
+	is_freed = true
+
+func is_dead(): 
+	return is_freed
+
+func disable():
+	get_node("CollisionShape2D").set_deferred("disabled", true)
+	disabled = true
+func enable():
+	get_node("CollisionShape2D").set_deferred("disabled", false)
+	disabled = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

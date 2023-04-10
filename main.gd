@@ -176,28 +176,29 @@ func _on_player_victory():
 func _on_smoke_screen():
 	$background_1.hide()
 	start_hidden = true
-	#var mobs = get_tree().get_nodes_in_group("mobs")
-	#print(len(mobs))
+	var mobs = get_tree().get_nodes_in_group("mobs")
 	# Replace with function body.
-	#for mob in mobs:
-	#	if not "pepper" in mob.name and is_instance_valid(mob):
-	#		mob.hide()
-	#		mob.disabled = true
-	#		$grapePath/grapeSpawnLocation.set_offset(randi())
-	#		while $grapePath/grapeSpawnLocation.position.distance_to($player.position) < 100:
-	#			$grapePath/grapeSpawnLocation.set_offset(randi())
-	#		mob.position = $grapePath/grapeSpawnLocation.position
-			
-
+	for mob in mobs:
+		if "mushroom" in mob.name or "grape" in mob.name:
+			if not mob.is_dead():
+				mob.hide()
+				mob.disable()
+				$grapePath/grapeSpawnLocation.set_offset(randi())
+				while $grapePath/grapeSpawnLocation.position.distance_to($player.position) < 200:
+					$grapePath/grapeSpawnLocation.set_offset(randi())
+				mob.position = $grapePath/grapeSpawnLocation.position
 
 func _on_smoke_screen_stop():
 	if start_hidden:
-	#	var mobs = get_tree().get_nodes_in_group("mobs")
+		var mobs = get_tree().get_nodes_in_group("mobs")
 	# Replace with function body.
-	#	for mob in mobs:
-	#		if not "pepper" in mob.name and is_instance_valid(mob):
-	#			mob.disabled = false
+		for mob in mobs:
+			if "mushroom" in mob.name or "grape" in mob.name:
+				if not mob.is_dead():
+					mob.show()
+					mob.enable()
 		$background_1.show()
 		start_hidden = false #th function body.
+		
 func _increment():
 	$HUD.update_progress()
