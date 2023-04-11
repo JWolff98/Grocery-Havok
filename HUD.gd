@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+var game_played
 signal start_game
 signal game_over
 signal win
@@ -8,6 +8,7 @@ signal wave_1
 signal wave_2
 signal wave_3
 signal pause
+signal boss_start
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -16,7 +17,7 @@ signal pause
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	game_played = false # Replace with function body.
 
 func show_message(text):
 	$message.text = text
@@ -37,15 +38,19 @@ func show_game_over():
 	$message.text = "Grocery Havok\nJRM Inc.\n\nRetry?"
 	$message.show()
 	$start_button.show()
+	$tutorial.show()
+	$boss.show()
 
 func show_congrats():
 	emit_signal("win")
 	show_message("Congratulations!")
 	yield($message_timer, "timeout")
 	$message_timer.stop()
-	$congrats.text = "You completed\nThe\nfirst level\nTry\nagain?"
+	$congrats.text = "You completed\nThe Game\nTry\nagain?"
 	$congrats.show()
 	$start_button.show()
+	$tutorial.show()
+	$boss.show()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -59,6 +64,8 @@ func _on_start_button_pressed():
 	$start_button.hide()
 	$message.hide()
 	$congrats.hide()
+	$tutorial.hide()
+	$boss.hide()
 	#$heart_1.animation = "full"
 	#$heart_2.animation = "full"
 	#$heart_3.animation = "full"
@@ -68,8 +75,20 @@ func _on_start_button_pressed():
 	emit_signal("start_game")
 	
 func _on_tutorial_pressed():
+	$start_button.hide()
 	$tutorial.hide()
 	$congrats.hide()
+	$message.hide()
+	$boss.hide()
 	emit_signal("tutorial")
 func update_progress():
 	$progress.set_value($progress.get_value() + 1)
+
+
+func _on_boss_pressed():
+	$start_button.hide()
+	$tutorial.hide()
+	$congrats.hide()
+	$message.hide()
+	$boss.hide()
+	emit_signal("boss_start") # Replace with function body.

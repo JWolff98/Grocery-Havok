@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://assets/backgrounds/produce_aisle/music/produce_aisle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://background_1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://grape.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/backgrounds/dimly_lit_kitchen.png" type="Texture" id=5]
 [ext_resource path="res://main.gd" type="Script" id=6]
 [ext_resource path="res://assets/GameOver.wav" type="AudioStream" id=7]
 [ext_resource path="res://mushroom.tscn" type="PackedScene" id=8]
@@ -12,6 +13,27 @@
 [ext_resource path="res://assets/menu.png" type="Texture" id=11]
 [ext_resource path="res://assets/Victory.wav" type="AudioStream" id=12]
 [ext_resource path="res://pepper.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/backgrounds/transition.png" type="Texture" id=14]
+[ext_resource path="res://assets/backgrounds/open_and_empty_fridge.png" type="Texture" id=15]
+[ext_resource path="res://assets/exclamation.png" type="Texture" id=16]
+[ext_resource path="res://assets/player.png" type="Texture" id=17]
+[ext_resource path="res://transition.gd" type="Script" id=18]
+[ext_resource path="res://magic_smoke.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/kyle.png" type="Texture" id=20]
+[ext_resource path="res://assets/fonts/Kaph-Italic.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://assets/Furious Face 2.png" type="Texture" id=22]
+[ext_resource path="res://assets/Furious Face 3.png" type="Texture" id=23]
+[ext_resource path="res://assets/Furious Face 4.png" type="Texture" id=24]
+[ext_resource path="res://assets/Furious Face 5.png" type="Texture" id=25]
+[ext_resource path="res://assets/Furious Face 6.png" type="Texture" id=26]
+[ext_resource path="res://transition_1.png" type="Texture" id=27]
+[ext_resource path="res://assets/Furious face 1.png" type="Texture" id=28]
+[ext_resource path="res://assets/Furious Face 7.png" type="Texture" id=29]
+[ext_resource path="res://magic_barrier.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Metal_18-512x512.png" type="Texture" id=31]
+[ext_resource path="res://general_manager.tscn" type="PackedScene" id=32]
+
+[sub_resource type="CircleShape2D" id=31]
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -25,20 +47,145 @@ vertices = PoolVector2Array( 184, 68, 602, 307, 310, 199, 272, 177, 185, 118, 24
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 7, 8, 9, 10 ), PoolIntArray( 10, 11, 5 ), PoolIntArray( 12, 13, 14, 0, 15 ), PoolIntArray( 16, 8, 17, 1 ), PoolIntArray( 7, 17, 8 ), PoolIntArray( 18, 19, 20, 21 ), PoolIntArray( 18, 21, 12, 15 ), PoolIntArray( 22, 7, 6, 23 ), PoolIntArray( 15, 0, 4, 24, 25 ), PoolIntArray( 26, 25, 24 ), PoolIntArray( 23, 27, 28, 26, 24, 29, 22 ), PoolIntArray( 30, 6, 5 ), PoolIntArray( 27, 30, 5, 31, 32 ), PoolIntArray( 27, 32, 28 ), PoolIntArray( 22, 29, 3, 2 ), PoolIntArray( 2, 1, 17 ) ]
 outlines = [ PoolVector2Array( 3, 92, 3, 0, 60, 0, 133, 39, 200, -1, 296, 0, 184, 68, 602, 307, 601, 363, 492, 438, 600, 503, 603, 602, 191, 598, 248, 564, 3, 410, 3, 357, 18, 349, 3, 328, 3, 158, 129, 86, 75, 56 ), PoolVector2Array( 159, 296, 394, 431, 547, 342, 310, 199 ), PoolVector2Array( 272, 177, 185, 118, 50, 200, 133, 254 ), PoolVector2Array( 85, 365, 57, 390, 270, 530, 305, 504 ) ]
 
+[sub_resource type="RectangleShape2D" id=5]
+
+[sub_resource type="RectangleShape2D" id=6]
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 0, 240, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 0, 480, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 0, 720, 240, 240 )
+
+[sub_resource type="SpriteFrames" id=20]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 720, 0, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 720, 240, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 720, 480, 240, 240 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 17 )
+region = Rect2( 720, 720, 240, 240 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 20 )
+region = Rect2( 17, 0, 174, 621 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 20 )
+region = Rect2( 195, 0, 150, 621 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 22 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=24]
+font_data = ExtResource( 21 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 233, 193 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 22 )
+region = Rect2( 0, 0, 219, 191 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 220, 193 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 212, 195 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=30]
+
 [node name="main" type="Node"]
 script = ExtResource( 6 )
 grape = ExtResource( 4 )
 mushroom = ExtResource( 8 )
 
-[node name="grey" type="ColorRect" parent="."]
+[node name="grey2" type="Area2D" parent="."]
+z_index = -1
+
+[node name="grey" type="ColorRect" parent="grey2"]
 margin_right = 600.0
 margin_bottom = 600.0
 color = Color( 0.313726, 0.270588, 0.270588, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grey2"]
+shape = SubResource( 31 )
 
 [node name="tutorial" parent="." instance=ExtResource( 10 )]
 visible = false
 
 [node name="background_1" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 64, 275 )
@@ -74,10 +221,11 @@ texture = ExtResource( 11 )
 expand = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="start_menu"]
+position = Vector2( 458, 497 )
 shape = SubResource( 2 )
 
 [node name="start_position" type="Position2D" parent="."]
-position = Vector2( 63, 275 )
+position = Vector2( 300, 425 )
 
 [node name="victory" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
@@ -89,12 +237,555 @@ visible = false
 position = Vector2( -1, 1 )
 navpoly = SubResource( 4 )
 
+[node name="empty_fridge" type="Area2D" parent="."]
+visible = false
+z_index = 3
+
+[node name="empty_fridge" type="TextureRect" parent="empty_fridge"]
+margin_right = 600.0
+margin_bottom = 600.0
+texture = ExtResource( 15 )
+expand = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="empty_fridge"]
+shape = SubResource( 5 )
+
+[node name="dim_kitchen" type="Area2D" parent="."]
+visible = false
+z_index = 4
+
+[node name="TextureRect" type="TextureRect" parent="dim_kitchen"]
+margin_right = 600.0
+margin_bottom = 600.0
+texture = ExtResource( 5 )
+expand = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dim_kitchen"]
+shape = SubResource( 6 )
+
+[node name="player" type="AnimatedSprite" parent="dim_kitchen"]
+position = Vector2( 287, 361 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 20 )
+
+[node name="exclamation" type="Sprite" parent="dim_kitchen"]
+visible = false
+position = Vector2( 404, 168 )
+rotation = 0.174533
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="transition" type="Area2D" parent="."]
+visible = false
+z_index = 5
+script = ExtResource( 18 )
+
+[node name="TextureRect" type="TextureRect" parent="transition"]
+margin_right = 600.0
+margin_bottom = 600.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="transition"]
+shape = SubResource( 7 )
+
+[node name="player" type="AnimatedSprite" parent="transition"]
+position = Vector2( -130, 457 )
+scale = Vector2( 1.15, 1.18333 )
+frames = SubResource( 14 )
+
+[node name="kyle" type="AnimatedSprite" parent="transition"]
+position = Vector2( 517, 339 )
+frames = SubResource( 23 )
+
+[node name="ColorRect" type="ColorRect" parent="transition"]
+visible = false
+light_mask = 0
+margin_left = 21.0
+margin_top = 81.0
+margin_right = 447.0
+margin_bottom = 205.0
+
+[node name="Label" type="Label" parent="transition"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 23.0
+margin_top = 91.0
+margin_right = 439.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 24 )
+
+[node name="TextureRect2" type="TextureRect" parent="transition"]
+visible = false
+margin_right = 600.0
+margin_bottom = 600.0
+texture = ExtResource( 27 )
+expand = true
+
+[node name="kyle_transform" type="AnimatedSprite" parent="transition/TextureRect2"]
+position = Vector2( 288.875, 342.25 )
+scale = Vector2( 2.48176, 2.67617 )
+frames = SubResource( 29 )
+frame = 1
+
+[node name="magic_barrier" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 69, 501 )
+scale = Vector2( 4, 4 )
+
+[node name="magic_barrier2" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 421, 133 )
+scale = Vector2( 4, 4 )
+
+[node name="magic_barrier3" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 141, 138 )
+scale = Vector2( 4, 4 )
+
+[node name="magic_barrier4" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 108, 335 )
+scale = Vector2( 4, 4 )
+
+[node name="magic_barrier5" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 288, 503 )
+scale = Vector2( 4, 4 )
+
+[node name="magic_barrier6" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 497, 496 )
+scale = Vector2( 4, 4 )
+
+[node name="magic_barrier7" parent="transition" instance=ExtResource( 30 )]
+visible = false
+position = Vector2( 473, 331 )
+scale = Vector2( 4, 4 )
+
+[node name="boss_fight" type="Area2D" parent="."]
+visible = false
+z_index = -1
+
+[node name="TextureRect" type="TextureRect" parent="boss_fight"]
+margin_right = 600.0
+margin_bottom = 600.0
+texture = ExtResource( 31 )
+expand = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_fight"]
+shape = SubResource( 30 )
+
+[node name="magic_barrier" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 569, 17 )
+
+[node name="magic_barrier58" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 588, 144 )
+
+[node name="magic_barrier59" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 590, 184 )
+
+[node name="magic_barrier65" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 587, 220 )
+
+[node name="magic_barrier66" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 589, 103 )
+
+[node name="magic_barrier67" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 591, 68 )
+
+[node name="magic_barrier68" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 589, 36 )
+
+[node name="magic_barrier61" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 587, 249 )
+
+[node name="magic_barrier62" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 585, 290 )
+
+[node name="magic_barrier63" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 584, 329 )
+
+[node name="magic_barrier64" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 585, 362 )
+
+[node name="magic_barrier39" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 586, 402 )
+
+[node name="magic_barrier40" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 539, 16 )
+
+[node name="magic_barrier41" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 511, 18 )
+
+[node name="magic_barrier42" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 477, 18 )
+
+[node name="magic_barrier43" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 451, 16 )
+
+[node name="magic_barrier44" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 421, 16 )
+
+[node name="magic_barrier45" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 391, 16 )
+
+[node name="magic_barrier46" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 358, 14 )
+
+[node name="magic_barrier47" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 319, 13 )
+
+[node name="magic_barrier48" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 283, 16 )
+
+[node name="magic_barrier49" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 248, 13 )
+
+[node name="magic_barrier50" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 209, 14 )
+
+[node name="magic_barrier51" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 164, 12 )
+
+[node name="magic_barrier52" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 126, 13 )
+
+[node name="magic_barrier53" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 92, 12 )
+
+[node name="magic_barrier54" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 63, 11 )
+
+[node name="magic_barrier55" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 36, 19 )
+
+[node name="magic_barrier56" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 13, 22 )
+
+[node name="magic_barrier57" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 11, 57 )
+
+[node name="magic_barrier18" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 6, 87 )
+
+[node name="magic_barrier19" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 588, 432 )
+
+[node name="magic_barrier20" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 587, 471 )
+
+[node name="magic_barrier21" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 585, 511 )
+
+[node name="magic_barrier22" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 583, 542 )
+
+[node name="magic_barrier23" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 576, 585 )
+
+[node name="magic_barrier24" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 541, 587 )
+
+[node name="magic_barrier25" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 506, 589 )
+
+[node name="magic_barrier26" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 466, 585 )
+
+[node name="magic_barrier27" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 430, 588 )
+
+[node name="magic_barrier28" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 395, 583 )
+
+[node name="magic_barrier29" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 363, 586 )
+
+[node name="magic_barrier30" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 328, 585 )
+
+[node name="magic_barrier31" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 289, 588 )
+
+[node name="magic_barrier32" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 256, 584 )
+
+[node name="magic_barrier33" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 219, 585 )
+
+[node name="magic_barrier34" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 189, 589 )
+
+[node name="magic_barrier35" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 158, 589 )
+
+[node name="magic_barrier36" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 130, 594 )
+
+[node name="magic_barrier37" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 103, 587 )
+
+[node name="magic_barrier38" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 44, 590 )
+
+[node name="magic_barrier2" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 73, 588 )
+
+[node name="magic_barrier3" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 4, 110 )
+
+[node name="magic_barrier4" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 8, 143 )
+
+[node name="magic_barrier5" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 11, 187 )
+
+[node name="magic_barrier6" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 15, 213 )
+
+[node name="magic_barrier7" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 10, 249 )
+
+[node name="magic_barrier8" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 8, 281 )
+
+[node name="magic_barrier9" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 12, 305 )
+
+[node name="magic_barrier10" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 9, 330 )
+
+[node name="magic_barrier11" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 8, 362 )
+
+[node name="magic_barrier12" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 7, 384 )
+
+[node name="magic_barrier13" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 5, 415 )
+
+[node name="magic_barrier14" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 2, 454 )
+
+[node name="magic_barrier15" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 5, 491 )
+
+[node name="magic_barrier16" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 6, 541 )
+
+[node name="magic_barrier17" parent="boss_fight" instance=ExtResource( 30 )]
+position = Vector2( 10, 588 )
+
+[node name="general_manager" parent="boss_fight" instance=ExtResource( 32 )]
+scale = Vector2( 2, 2 )
+z_index = 1
+
+[node name="magic_smoke" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 53, 69 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke2" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 234, 43 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke3" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 215, 157 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke4" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 170, 121 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke5" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 144, 199 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke6" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 90, 173 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke7" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 480, 102 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke8" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 553, 142 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke9" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 535, 211 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke10" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 454, 173 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke11" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 377, 130 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke12" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 306, 79 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke13" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 353, 356 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke14" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 416, 302 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke15" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 283, 308 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke16" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 351, 263 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke17" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 288, 214 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke18" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 470, 24 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke19" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 552, 61 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke20" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 221, 271 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke21" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 74, 571 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke22" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 28, 516 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke23" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 162, 543 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke24" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 98, 495 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke25" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 32, 444 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke26" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 376, 40 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke27" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 594, 382 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke28" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 549, 428 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke29" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 403, 375 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke30" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 470, 326 )
+scale = Vector2( 2, 2 )
+
+[node name="magic_smoke31" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 80, 378 )
+
+[node name="magic_smoke32" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 113, 398 )
+
+[node name="magic_smoke33" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 2, 336 )
+
+[node name="magic_smoke34" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 15, 132 )
+
+[node name="magic_smoke35" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 129, 17 )
+
+[node name="magic_smoke36" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 146, 420 )
+
+[node name="magic_smoke37" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 171, 442 )
+
+[node name="magic_smoke38" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 202, 457 )
+
+[node name="magic_smoke39" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 235, 476 )
+
+[node name="magic_smoke40" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 266, 497 )
+
+[node name="magic_smoke41" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 584, 260 )
+
+[node name="boss_player_start" type="Position2D" parent="."]
+
 [connection signal="done" from="tutorial" to="." method="_on_tutorial_done"]
 [connection signal="hit" from="player" to="." method="_on_player_hit"]
-[connection signal="victory" from="player" to="." method="_on_player_victory"]
+[connection signal="level_1" from="player" to="." method="_on_player_level_1"]
 [connection signal="timeout" from="mushroomTimer" to="." method="_on_mushroomTimer_timeout"]
 [connection signal="timeout" from="grapeTimer" to="." method="_on_grapeTimer_timeout"]
+[connection signal="boss_start" from="HUD" to="." method="_on_HUD_boss_start"]
 [connection signal="game_over" from="HUD" to="." method="_on_HUD_game_over"]
 [connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
 [connection signal="tutorial" from="HUD" to="." method="_on_HUD_tutorial"]
 [connection signal="win" from="HUD" to="." method="_on_HUD_win"]
+[connection signal="transition_done" from="transition" to="." method="_on_transition_transition_done"]
+[connection signal="boss_death" from="boss_fight/general_manager" to="." method="_on_general_manager_boss_death"]

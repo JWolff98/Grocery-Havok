@@ -7,7 +7,9 @@ var max_hp = 150
 var current_hp
 var dead = false
 var tutorial = false
+var spawned = false
 signal pepper_death
+signal pepp_tutorial_shot
 func _physics_process(delta):
 	if not dead:
 		pass
@@ -18,7 +20,15 @@ func _ready():
 	current_hp = max_hp
 	hide()
 	$AnimatedSprite.playing = false
-
+	on_spawn()
+func on_spawn():
+	$AnimatedSprite.playing = true
+	$AnimatedSprite.animation = "spawn"
+	$AnimatedSprite.play()
+	yield($AnimatedSprite, "animation_finished")
+	spawned = true
+	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.playing = true
 func start():
 	show()
 	$AnimatedSprite.animation = "idle"
@@ -54,7 +64,8 @@ func on_hit(dmg):
 		$AnimatedSprite.play()
 		yield($AnimatedSprite, "animation_finished")
 		$AnimatedSprite.animation = "idle"
-		$AnimatedSprite.playing = true    
+		$AnimatedSprite.playing = true
+		emit_signal("pepp_tutorial_shot")   
 		 
 func on_death():
 	dead = true

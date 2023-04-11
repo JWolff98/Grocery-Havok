@@ -11,11 +11,13 @@ var hit = false
 var disabled = false
 var tutorial = false
 var is_freed = false
+var spawned = false
 onready var navigation_agent = $NavigationAgent2D
 signal mushroom_death
+signal mush_tutorial_shot
 
 func _physics_process(delta):
-	if not dead and not hit and not disabled:
+	if not dead and not hit and not tutorial and not disabled and spawned:
 		$AnimatedSprite.playing = true
 		var velocity = Vector2.ZERO
 
@@ -54,14 +56,24 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	frameTimer = 0
 	current_hp = max_hp
-
+	on_spawn()
+func on_spawn():
+	$AnimatedSprite.playing = true
+	$AnimatedSprite.animation = "spawn"
+	$AnimatedSprite.play()
+	yield($AnimatedSprite, "animation_finished")
+	spawned = true
+	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.playing = true
 func on_hit(dmg):
 	current_hp -= dmg
 	if current_hp > 0 and not tutorial:
 		hit = true
+		$CollisionShape2D.set_deferred("disabled", true)
 		get_node("AnimatedSprite").play("hit")
 		yield($AnimatedSprite, "animation_finished")
 		hit = false
+		$CollisionShape2D.set_deferred("disabled", false)
 	if current_hp <= 0 and not tutorial:
 		on_death()
 	if tutorial:
@@ -70,6 +82,7 @@ func on_hit(dmg):
 		yield($AnimatedSprite, "animation_finished")
 		$AnimatedSprite.animation = "running"
 		$AnimatedSprite.playing = true
+		emit_signal("mush_tutorial_shot")
 func on_death():
 	dead = true
 	get_node("CollisionShape2D").set_deferred("disabled", true)

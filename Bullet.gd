@@ -25,7 +25,7 @@ func set_ang(an):
 
 func _on_Bullet_body_entered(body):
 	get_node("CollisionShape2D").set_deferred("disabled", true)
-	if body.is_in_group("mobs"):	
+	if body.is_in_group("mobs") or body.is_in_group("boss"):	
 		#get_parent().get_node("player").num_enemies_hit += 1
 		#body.queue_free() # Replace with function body
 		body.on_hit(dmg)

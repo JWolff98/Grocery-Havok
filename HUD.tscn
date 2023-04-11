@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/Kaph-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/Kaph-Italic.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -22,6 +23,9 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.0745098, 0.384314, 0.784314, 1 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 3 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -49,19 +53,18 @@ custom_fonts/font = SubResource( 2 )
 align = 1
 
 [node name="tutorial" type="Button" parent="."]
-anchor_left = 0.487
-anchor_top = 0.383
-anchor_right = 0.487
-anchor_bottom = 0.383
-margin_left = -57.2
-margin_top = -18.8
-margin_right = 56.8
-margin_bottom = 19.2
+anchor_left = 0.5
+anchor_top = 0.615
+anchor_right = 0.5
+anchor_bottom = 0.615
+margin_left = -84.0
+margin_top = -19.0
+margin_right = 84.0
+margin_bottom = 19.0
 custom_fonts/font = SubResource( 3 )
-text = "Start"
+text = "Tutorial"
 
 [node name="start_button" type="Button" parent="."]
-visible = false
 anchor_left = 0.492
 anchor_top = 0.465
 anchor_right = 0.492
@@ -85,6 +88,16 @@ custom_styles/bg = SubResource( 6 )
 max_value = 23.0
 step = 1.0
 
+[node name="boss" type="Button" parent="."]
+visible = false
+margin_left = 146.0
+margin_top = 427.0
+margin_right = 442.0
+margin_bottom = 476.0
+custom_fonts/font = SubResource( 7 )
+text = "See the General Manager"
+
 [connection signal="pressed" from="tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="message_timer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="boss" to="." method="_on_boss_pressed"]

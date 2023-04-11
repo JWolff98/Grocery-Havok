@@ -15,10 +15,12 @@ var dead = false
 var tutorial = false
 var is_freed = false
 var disabled = false
+var spawned = false
 signal grape_death
+signal grap_tutorial_shot
 
 func _physics_process(delta):
-	if not dead and not disabled:
+	if not dead and not disabled and spawned:
 		$AnimatedSprite.playing = true
 		$AnimatedSprite.animation = "move"
 		var move_towards = get_parent().get_node("player").position
@@ -26,6 +28,11 @@ func _physics_process(delta):
 		navigation_agent.set_target_location(move_towards)
 		var move_direction = position.direction_to(navigation_agent.get_next_location())
 		var velocity = move_direction * speed
+		if velocity.x != 0:
+			if velocity.x > 0:
+				$AnimatedSprite.flip_h = true
+			elif velocity.x < 0:
+				$AnimatedSprite.flip_h = false
 		navigation_agent.set_velocity(velocity)
 		velocity = move_and_collide(velocity*delta)
 
@@ -49,8 +56,15 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	frameTimer = 0
 	current_hp = max_hp
+	on_spawn()
 
-
+func on_spawn():
+	$AnimatedSprite.playing = true
+	$AnimatedSprite.animation = "spawn"
+	$AnimatedSprite.play()
+	yield($AnimatedSprite, "animation_finished")
+	spawned = true
+	$AnimatedSprite.animation = "move"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -64,6 +78,7 @@ func on_hit(dmg):
 		yield($AnimatedSprite, "animation_finished")
 		$AnimatedSprite.animation = "move"
 		$AnimatedSprite.playing = true
+		emit_signal("grap_tutorial_shot")
 func on_death():
 	dead = true
 	get_node("CollisionShape2D").set_deferred("disabled", true)
