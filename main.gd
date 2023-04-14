@@ -454,6 +454,8 @@ func _on_transition_transition_done():
 	$boss_fight.show()
 	$boss_fight/general_manager.position = Vector2(300, 300)
 	$boss_fight/general_manager.enable()
+	$boss_fight/general_manager.current_hp = $boss_fight/general_manager.max_hp
+	$boss_fight/general_manager/AnimatedSprite.animation = "float"
 	$boss_fight/general_manager.dead = false# Replace with function body.
 
 

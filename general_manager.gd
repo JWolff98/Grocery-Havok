@@ -37,6 +37,7 @@ func _ready():
 func _physics_process(delta):
 	if not dead and not disabled and not attack and not hit:
 		$AnimatedSprite.playing = true
+		$AnimatedSprite.animation = "float"
 		var move_towards = get_parent().get_parent().get_node("player").position
 		
 		#navigation_agent.set_target_location(move_towards)
@@ -65,6 +66,7 @@ func _physics_process(delta):
 		#	move_and_collide(velocity*delta)
 		position.x = clamp(position.x, 0, screen_size.x)
 		position.y = clamp(position.y, 0, screen_size.y)
+		
 func on_hit(dmg):
 	current_hp -= dmg
 	if current_hp > 0 and not tutorial:
@@ -76,6 +78,7 @@ func on_hit(dmg):
 		$CollisionShape2D.set_deferred("disabled", false)
 	if current_hp <= 0 and not tutorial:
 		on_death()
+		
 func on_death():
 	dead = true
 	$attack.stop()
@@ -93,10 +96,11 @@ func disable():
 	get_node("CollisionShape2D").set_deferred("disabled", true)
 	disabled = true
 	$attack.stop()
+
 func enable():
 	get_node("CollisionShape2D").set_deferred("disabled", false)
 	disabled = false
-	$attack.stop()
+	$attack.start()
 
 func _on_attack_timeout():
 	$AnimatedSprite.animation = "attack"

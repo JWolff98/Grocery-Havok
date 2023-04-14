@@ -96,7 +96,8 @@ func _unhandled_input(event):
 
 func _on_aoi_body_entered(body):
 	if (body.is_in_group("mobs") or body.is_in_group("boss")) and not tutorial:
-		body.queue_free()
+		if body.is_in_group("mobs"):
+			body.queue_free()
 		dead = true
 		$AnimatedSprite.play("exhaustion")
 		yield($AnimatedSprite, "animation_finished")

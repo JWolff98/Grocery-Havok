@@ -318,7 +318,7 @@ animations = [ {
 "speed": 45.0
 } ]
 
-[node name="magic_barrier" type="Area2D"]
+[node name="magic_barrier" type="Area2D" groups=["boss"]]
 z_index = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -326,5 +326,5 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 63 )
-frame = 5
+frame = 26
 playing = true
