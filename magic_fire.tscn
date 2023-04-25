@@ -110,7 +110,7 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[node name="magic_fire" type="Area2D" groups=["mobs"]]
+[node name="magic_fire" type="Area2D" groups=["death"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -119,7 +119,8 @@ rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 1023
 frames = SubResource( 20 )
 animation = "telegraph"
-frame = 6
+frame = 4
 playing = true

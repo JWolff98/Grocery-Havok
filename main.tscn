@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/backgrounds/produce_aisle/music/produce_aisle.mp3" type="AudioStream" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
@@ -165,6 +165,12 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=30]
 
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 21.5, 309 )
+
+[sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 308, 26.5 )
+
 [node name="main" type="Node"]
 script = ExtResource( 6 )
 grape = ExtResource( 4 )
@@ -326,7 +332,6 @@ expand = true
 position = Vector2( 288.875, 342.25 )
 scale = Vector2( 2.48176, 2.67617 )
 frames = SubResource( 29 )
-frame = 1
 
 [node name="magic_barrier" parent="transition" instance=ExtResource( 30 )]
 visible = false
@@ -581,6 +586,30 @@ position = Vector2( 10, 588 )
 scale = Vector2( 2, 2 )
 z_index = 1
 
+[node name="death_zone_1" type="Area2D" parent="boss_fight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_fight/death_zone_1"]
+position = Vector2( 11.5, 299 )
+shape = SubResource( 32 )
+
+[node name="death_zone_2" type="Area2D" parent="boss_fight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_fight/death_zone_2"]
+position = Vector2( 583, 301 )
+shape = SubResource( 32 )
+
+[node name="death_zone_3" type="Area2D" parent="boss_fight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_fight/death_zone_3"]
+position = Vector2( 298, 16.5 )
+shape = SubResource( 33 )
+
+[node name="death_zone_4" type="Area2D" parent="boss_fight"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_fight/death_zone_4"]
+position = Vector2( 300, 588 )
+shape = SubResource( 33 )
+
 [node name="magic_smoke" parent="." instance=ExtResource( 19 )]
 visible = false
 position = Vector2( 53, 69 )
@@ -789,3 +818,11 @@ position = Vector2( 584, 260 )
 [connection signal="win" from="HUD" to="." method="_on_HUD_win"]
 [connection signal="transition_done" from="transition" to="." method="_on_transition_transition_done"]
 [connection signal="boss_death" from="boss_fight/general_manager" to="." method="_on_general_manager_boss_death"]
+[connection signal="boss_hit" from="boss_fight/general_manager" to="." method="_on_general_manager_boss_hit"]
+[connection signal="body_entered" from="boss_fight/death_zone_1" to="." method="_on_death_zone_1_body_entered"]
+[connection signal="body_entered" from="boss_fight/death_zone_2" to="." method="_on_death_zone_2_body_entered"]
+[connection signal="body_entered" from="boss_fight/death_zone_2" to="." method="_on_death_zone_1_body_entered"]
+[connection signal="body_entered" from="boss_fight/death_zone_3" to="." method="_on_death_zone_3_body_entered"]
+[connection signal="body_entered" from="boss_fight/death_zone_3" to="." method="_on_death_zone_1_body_entered"]
+[connection signal="body_entered" from="boss_fight/death_zone_4" to="." method="_on_death_zone_1_body_entered"]
+[connection signal="body_entered" from="boss_fight/death_zone_4" to="." method="_on_death_zone_4_body_entered"]

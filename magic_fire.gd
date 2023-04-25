@@ -16,12 +16,15 @@ func _ready():
 #func _process(delta):
 #	pass
 func start():
+	show()
 	$AnimatedSprite.animation = "telegraph"
 	$AnimatedSprite.play()
 	yield($AnimatedSprite, "animation_finished")
 	$CollisionShape2D.disabled = false
-	$animatedSprite.animation = "explosion"
+	$AnimatedSprite.animation = "explosion"
 	$AnimatedSprite.play()
 	yield($AnimatedSprite, "animation_finished")
-	$CollisionShape2D.disabled = false
+	$CollisionShape2D.disabled = true
+	hide()
+	yield(get_tree().create_timer(0.5), "timeout")
 	queue_free()

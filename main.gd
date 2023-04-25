@@ -13,6 +13,7 @@ var game_start = false
 var p = pepper.instance()
 var pepper_dead = false
 var start_hidden = false
+var boss = false
 export var num_enemies_hit = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -64,6 +65,13 @@ func _on_grapeTimer_timeout():
 		$mushroomTimer.start()
 
 func _on_player_hit():
+	$HUD/progress.hide()
+	$HUD/progress.set_value(0)
+	$boss_fight/general_manager.disable()
+	$boss_fight.hide()
+	num_grapes = 0
+	num_mushroom = 0
+	$player.num_enemies_hit = 0
 	$produce_aisle.stop()
 	$grapeTimer.stop()
 	$mushroomTimer.stop()
@@ -103,6 +111,7 @@ func _on_mushroomTimer_timeout():
 		p.connect("pepper_death", $player, "_on_pepper_death")
 
 func _on_HUD_start_game():
+	boss = false
 	$empty_fridge.hide()
 	$HUD/tutorial.hide()
 	get_tree().call_group("mobs", "queue_free")
@@ -110,10 +119,13 @@ func _on_HUD_start_game():
 	$player.dead = false
 	num_grapes = 0
 	num_mushroom = 0
+	$HUD/progress.max_value = 23
+	$HUD/progress.set_value(0)
 	#p = pepper.instance()
 	$player.tutorial = false
 	$start_menu.hide()
 	$tutorial.hide()
+	$boss_fight.hide()
 	$produce_aisle.play()
 	$background_1.show()
 	$background_1/aisle_0/CollisionPolygon2D.disabled = false
@@ -137,14 +149,17 @@ func _on_HUD_game_over():
 	$player.num_enemies_hit = 0
 	$start_menu.show()
 	game_start = false
+	boss = false
 
 func _on_HUD_tutorial():
+	boss = false
 	$empty_fridge.hide()
 	$player.dead = false
 	$player.tutorial = true
 	$start_menu.hide()
 	$HUD/start_button.hide()
 	$HUD/boss.hide()
+	$boss_fight.hide()
 	$HUD/message.hide()
 	$background_1.hide()
 	$background_1.hide()
@@ -188,6 +203,7 @@ func _on_pepper_off():
 
 
 func _on_player_victory():
+	boss = false
 	$HUD/progress.hide()
 	$HUD/progress.set_value(0)
 	num_grapes = 0
@@ -398,11 +414,95 @@ func _on_smoke_screen_stop():
 		$magic_smoke41/AnimatedSprite.playing = false
 		start_hidden = false #th function body.
 func _increment():
-	$HUD.update_progress()
+	$HUD.update_progress(boss)
 
 
 func _on_player_level_1():
+	$magic_smoke/AnimatedSprite.playing = false
+	$magic_smoke2.hide()
+	$magic_smoke2/AnimatedSprite.playing = false
+	$magic_smoke3.hide()
+	$magic_smoke3/AnimatedSprite.playing = false
+	$magic_smoke4.hide()
+	$magic_smoke4/AnimatedSprite.playing = false
+	$magic_smoke5.hide()
+	$magic_smoke5/AnimatedSprite.playing = false
+	$magic_smoke6.hide()
+	$magic_smoke6/AnimatedSprite.playing = false
+	$magic_smoke7.hide()
+	$magic_smoke7/AnimatedSprite.playing = false
+	$magic_smoke8.hide()
+	$magic_smoke8/AnimatedSprite.playing = false
+	$magic_smoke9.hide()
+	$magic_smoke9/AnimatedSprite.playing = false
+	$magic_smoke10.hide()
+	$magic_smoke10/AnimatedSprite.playing = false
+	$magic_smoke11.hide()
+	$magic_smoke11/AnimatedSprite.playing = false
+	$magic_smoke12.hide()
+	$magic_smoke12/AnimatedSprite.playing = false
+	$magic_smoke13.hide()
+	$magic_smoke13/AnimatedSprite.playing = false
+	$magic_smoke14.hide()
+	$magic_smoke14/AnimatedSprite.playing = false
+	$magic_smoke15.hide()
+	$magic_smoke15/AnimatedSprite.playing = false
+	$magic_smoke16.hide()
+	$magic_smoke16/AnimatedSprite.playing = false
+	$magic_smoke17.hide()
+	$magic_smoke17/AnimatedSprite.playing = false
+	$magic_smoke18.hide()
+	$magic_smoke18/AnimatedSprite.playing = false
+	$magic_smoke19.hide()
+	$magic_smoke19/AnimatedSprite.playing = false
+	$magic_smoke20.hide()
+	$magic_smoke20/AnimatedSprite.playing = false
+	$magic_smoke21.hide()
+	$magic_smoke21/AnimatedSprite.playing = false
+	$magic_smoke22.hide()
+	$magic_smoke22/AnimatedSprite.playing = false
+	$magic_smoke23.hide()
+	$magic_smoke23/AnimatedSprite.playing = false
+	$magic_smoke24.hide()
+	$magic_smoke24/AnimatedSprite.playing = false
+	$magic_smoke25.hide()
+	$magic_smoke25/AnimatedSprite.playing = false
+	$magic_smoke26.hide()
+	$magic_smoke26/AnimatedSprite.playing = false
+	$magic_smoke27.hide()
+	$magic_smoke27/AnimatedSprite.playing = false
+	$magic_smoke28.hide()
+	$magic_smoke28/AnimatedSprite.playing = false
+	$magic_smoke29.hide()
+	$magic_smoke29/AnimatedSprite.playing = false
+	$magic_smoke30.hide()
+	$magic_smoke30/AnimatedSprite.playing = false
+	$magic_smoke31.hide()
+	$magic_smoke31/AnimatedSprite.playing = false
+	$magic_smoke32.hide()
+	$magic_smoke32/AnimatedSprite.playing = false
+	$magic_smoke33.hide()
+	$magic_smoke33/AnimatedSprite.playing = false
+	$magic_smoke34.hide()
+	$magic_smoke34/AnimatedSprite.playing = false
+	$magic_smoke35.hide()
+	$magic_smoke35/AnimatedSprite.playing = false
+	$magic_smoke36.hide()
+	$magic_smoke36/AnimatedSprite.playing = false
+	$magic_smoke37/AnimatedSprite.hide()
+	$magic_smoke37/AnimatedSprite.playing = false
+	$magic_smoke38.hide()
+	$magic_smoke38/AnimatedSprite.playing = false
+	$magic_smoke39.hide()
+	$magic_smoke39/AnimatedSprite.playing = false
+	$magic_smoke40.hide()
+	$magic_smoke40/AnimatedSprite.playing = false
+	$magic_smoke41.hide()
+	$magic_smoke41/AnimatedSprite.playing = false
+	start_hidden = false 
+	boss = false
 	$HUD/progress.hide()
+	$HUD/progress.max_value = 23
 	$HUD/progress.set_value(0)
 	num_grapes = 0
 	num_mushroom = 0
@@ -415,6 +515,8 @@ func _on_player_level_1():
 	$produce_aisle.stop()
 	$transition.show()
 	$transition.start()
+	$HUD/progress.max_value = 15
+	$HUD/progress.set_value(15)
 	# Replace with function body.
 
 
@@ -422,6 +524,8 @@ func _on_HUD_boss_start():
 	$produce_aisle.stop()
 	$transition.show()
 	$transition.start()
+	$HUD/progress.max_value = 15
+	$HUD/progress.set_value(15)
 
 
 func _on_transition_transition_done():
@@ -433,11 +537,13 @@ func _on_transition_transition_done():
 	$empty_fridge.hide()
 	$HUD/tutorial.hide()
 	get_tree().call_group("mobs", "queue_free")
+	$boss_fight/general_manager.position = Vector2(300, 300)
 	$HUD/progress.show()
 	$player.dead = false
-	$player.position = Vector2(500, 500)
+	$player.position = Vector2(475, 500)
 	#p = pepper.instance()
 	$player.tutorial = false
+	boss = true
 	$player.show()
 	$start_menu.hide()
 	$tutorial.hide()
@@ -454,6 +560,8 @@ func _on_transition_transition_done():
 	$boss_fight.show()
 	$boss_fight/general_manager.position = Vector2(300, 300)
 	$boss_fight/general_manager.enable()
+	$boss_fight/general_manager.current_hp = $boss_fight/general_manager.max_hp
+	$boss_fight/general_manager/AnimatedSprite.animation = "float"
 	$boss_fight/general_manager.dead = false# Replace with function body.
 
 
@@ -461,6 +569,7 @@ func _on_general_manager_boss_death():
 	$HUD/progress.hide()
 	$HUD/progress.set_value(0)
 	$boss_fight/general_manager.disable()
+	$boss_fight.hide()
 	num_grapes = 0
 	num_mushroom = 0
 	$player.num_enemies_hit = 0
@@ -474,4 +583,43 @@ func _on_general_manager_boss_death():
 	$victory.play()
 	$victory.stop()
 	game_start = false
-	$HUD.show_congrats() 
+	$HUD.show_congrats()
+	boss = false
+
+
+func _on_death_zone_1_body_entered(body):
+	if body.is_in_group("player") and boss:
+		$player.dead = true
+		$player/AnimatedSprite.play("exhaustion")
+		yield($player/AnimatedSprite, "animation_finished")
+		$player.emit_signal("hit")
+		$player.hide() # Replace with function body.
+
+
+func _on_general_manager_boss_hit():
+	_increment() # Replace with function body.
+
+
+func _on_death_zone_2_body_entered(body): # Replace with function body.
+	if body.is_in_group("player") and boss:
+		$player.dead = true
+		$player/AnimatedSprite.play("exhaustion")
+		yield($player/AnimatedSprite, "animation_finished")
+		$player.emit_signal("hit")
+		$player.hide()
+
+func _on_death_zone_3_body_entered(body):
+	if body.is_in_group("player") and boss:
+		$player.dead = true
+		$player/AnimatedSprite.play("exhaustion")
+		yield($player/AnimatedSprite, "animation_finished")
+		$player.emit_signal("hit")
+		$player.hide()
+
+func _on_death_zone_4_body_entered(body):
+	if body.is_in_group("player") and boss:
+		$player.dead = true
+		$player/AnimatedSprite.play("exhaustion")
+		yield($player/AnimatedSprite, "animation_finished")
+		$player.emit_signal("hit")
+		$player.hide()

@@ -95,8 +95,9 @@ func _unhandled_input(event):
 			$bulletCooldown.start()
 
 func _on_aoi_body_entered(body):
-	if (body.is_in_group("mobs") or body.is_in_group("boss")) and not tutorial:
-		body.queue_free()
+	if (body.is_in_group("mobs") or body.is_in_group("boss") or body.is_in_group("death")) and not tutorial:
+		if body.is_in_group("mobs"):
+			body.queue_free()
 		dead = true
 		$AnimatedSprite.play("exhaustion")
 		yield($AnimatedSprite, "animation_finished")
@@ -131,3 +132,14 @@ func _on_pepper_death():
 
 func _on_bulletCooldown_timeout():
 	can_shoot = true
+
+
+func _on_aoi_area_entered(area):
+	if area.is_in_group("death") and not tutorial and not dead:
+		dead = true
+		$AnimatedSprite.play("exhaustion")
+		yield($AnimatedSprite, "animation_finished")
+		area.get_node("CollisionShape2D").disabled = true
+		area.queue_free()
+		emit_signal("hit")
+		hide() # Replace with function body.

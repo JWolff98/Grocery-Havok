@@ -43,8 +43,12 @@ func finish():
 	yield(get_tree().create_timer(1.5), "timeout")
 	$Label.text = "What are you doing here!\nYou are not supposed to be here!\nGet Out!"
 	yield(get_tree().create_timer(1), "timeout")
+	$Label.text = ""
+	$Label.hide()
+	$ColorRect.hide()
 	$TextureRect2.show()
 	$TextureRect2/kyle_transform.play()
+	$TextureRect2/kyle_transform.frame = 0
 	yield($TextureRect2/kyle_transform, "animation_finished")
 	$TextureRect2/kyle_transform.playing = false
 	$TextureRect2/kyle_transform.frame = 6

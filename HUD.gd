@@ -81,8 +81,11 @@ func _on_tutorial_pressed():
 	$message.hide()
 	$boss.hide()
 	emit_signal("tutorial")
-func update_progress():
-	$progress.set_value($progress.get_value() + 1)
+func update_progress(boss):
+	if not boss:
+		$progress.set_value($progress.get_value() + 1)
+	else:
+		$progress.set_value($progress.get_value() - 1)
 
 
 func _on_boss_pressed():
